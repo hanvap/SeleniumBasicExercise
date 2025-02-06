@@ -10,18 +10,18 @@ namespace TestProject3
     [TestFixture]
     public class WorkingWithDropDown
     {
-        IWebDriver driver;
+        private IWebDriver driver;
 
         [SetUp]
         public void SetUp()
         {
             // Create object of ChromeDriver
             driver = new ChromeDriver();
-            
+
 
             // Add implicit wait
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-           
+
         }
 
         [Test]
@@ -83,10 +83,13 @@ namespace TestProject3
                     }
                 }
             }
+        }
 
-            // Quit the driver
-            driver.Quit();
-            driver.Dispose();
+        [TearDown]
+        public void CleanUp()
+        {
+            driver?.Quit(); // Close the browser
+            driver?.Dispose(); // Release resources
         }
     }
 }
