@@ -17,11 +17,7 @@ jobs:
       - name: Setup .NET  
         uses: actions/setup-dotnet@v3  
         with:  
-          dotnet-version: '6.0.x'  # Specify the .NET version you're targeting  
-
-      - name: Fix permissions  
-        run: |  
-          sudo chmod +x $GITHUB_WORKSPACE/SeleniumIDE/bin/Debug/net6.0/selenium-manager/linux/selenium-manager  
+          dotnet-version: '6.0.x'  # Specify the .NET version you're targeting    
 
       - name: Install Chrome  
         run: |  
