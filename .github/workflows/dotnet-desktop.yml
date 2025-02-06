@@ -1,0 +1,40 @@
+name: SELENIUM Build and Test  
+
+on:  
+  push:  
+    branches: [ "master" ]  
+  pull_request:  
+    branches: [ "master" ]  
+
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v4  
+
+      - name: Setup .NET  
+        uses: actions/setup-dotnet@v3  
+        with:  
+          dotnet-version: '6.0.x'  # Specify the .NET version you're targeting  
+
+      - name: Fix permissions  
+        run: |  
+          sudo chmod +x $GITHUB_WORKSPACE/SeleniumIDE/bin/Debug/net6.0/selenium-manager/linux/selenium-manager  
+
+      - name: Install Chrome  
+        run: |  
+          sudo apt-get update  
+          sudo apt-get install -y google-chrome-stable  
+
+      - name: Install dependencies  
+        run: dotnet restore  
+
+      - name: Build  
+        run: dotnet build --no-restore  
+
+      - name: Run tests  
+        env:  
+          CHROMEWEBDRIVER: /usr/bin/google-chrome  
+        run: dotnet test --verbosity normal
