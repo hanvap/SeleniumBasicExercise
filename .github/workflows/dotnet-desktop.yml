@@ -1,4 +1,4 @@
-name: SELENIUM Build and Test  
+name: SELENIUM Web Build and Test  
 
 on:  
   push:  
